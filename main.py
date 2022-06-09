@@ -44,12 +44,27 @@ def ImgResizeSquare(i_path, o_path, target_width, target_height):
         # 画像保存
         resized_img.save(os.path.join(o_path, file))
 
+# 入力パス, 出力パスをコンソールの入力として取得
+def GetInputOutputPath():
+    
+    print("入力画像フォルダのパス")
+    i_path = input(">> ")
+
+    print("出力先フォルダのパス")
+    o_path = input(">> ")
+
+    return i_path, o_path
 
 
 if __name__ == "__main__":
-    i_path = "C:/Users/81804/Documents/Develop/python/ImgResize_square/imgs"
-    o_path = "C:/Users/81804/Documents/Develop/python/ImgResize_square/resized_imgs"
-    ImgResizeSquare(i_path, o_path, 256, 256)
+
+    RESIZE_WIDTH_DEFAULT = 256
+    RESIZE_HEIGHT_DEFAULT = 256
+
+    # 入力, 出力のパス取得
+    i_path, o_path = GetInputOutputPath()
+
+    ImgResizeSquare(i_path, o_path, RESIZE_WIDTH_DEFAULT, RESIZE_HEIGHT_DEFAULT)
 
 
 
