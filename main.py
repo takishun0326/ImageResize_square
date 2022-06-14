@@ -35,8 +35,11 @@ def ImgResizeSquare(i_path, o_path, target_width, target_height, amt_shift):
     files = os.listdir(i_path)
     
     for file in files:
-        img = Image.open(os.path.join(i_path, file))
-        
+        try:
+            img = Image.open(os.path.join(i_path, file))
+        except Exception as e:
+            print("cannot open " + str(file))
+
         # 最大サイズの正方形切り出し → 目的のサイズへリサイズ
         cropped_img = CropMaxSquare(img, amt_shift)
         resized_img = KeepAspectImg(cropped_img, target_width, target_height)
@@ -62,7 +65,7 @@ if __name__ == "__main__":
     RESIZE_HEIGHT_DEFAULT = 256
 
     # 正方形切り出しの位置を上げる量 負: 上へシフト, 正: 下へシフト
-    AMOUNT_SHIFT = -240
+    AMOUNT_SHIFT = -100
 
     # 入力, 出力のパス取得
     i_path, o_path = GetInputOutputPath()
